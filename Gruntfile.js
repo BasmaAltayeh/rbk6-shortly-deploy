@@ -3,6 +3,16 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';'
+      },
+      dist: {
+        src: [
+          'public/client/**/*.js',
+          'public/lib/**/*.js',
+        ],
+        dest: 'public/dist/Build.js'
+      }
     },
 
     mochaTest: {
@@ -21,6 +31,14 @@ module.exports = function (grunt) {
     },
 
     uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      dist: {
+        files: {
+          'public/dist/Build.js' : ['public/dist/Build.js']
+        }
+      }
     },
 
     eslint: {
